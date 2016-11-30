@@ -1,5 +1,6 @@
 package eu.zvireciliga.teamlottery;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.zvireciliga.teamlottery.adapters.TeamsAdapter;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
 
     @ViewById
+    FloatingActionButton fab;
+
+    @ViewById
     ListView teamList;
 
     @ViewById
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity
     @Bean
     TeamDAO dao;
 
+    private final List<Team> teams = new ArrayList<>();
+
     @AfterViews
     void initialize()
     {
@@ -58,28 +65,34 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        final List<Team> teams = dao.getTeams(new TeamDAO.OnChangeListener()
+        teams.addAll(dao.getTeams(new TeamDAO.OnChangeListener()
         {
             @Override
-            public void onChange(List<Team> teams)
+            public void onChange(List<Team> newTeams)
             {
-                calculateProgress(teams);
+                teams.clear();
+                teams.addAll(newTeams);
+                calculateProgress();
             }
-        });
-        calculateProgress(teams);
+        }));
+        calculateProgress();
+        progressBar.setMax(teams.size() * 6);
     }
 
-    private void calculateProgress(List<Team> teams)
+    private void calculateProgress()
     {
-        int maxPlayers = teams.size() * 6;
         int currentPlayers = 0;
         for(Team team : teams)
         {
             currentPlayers += team.getPlayers().size();
         }
-        progressBar.setProgress((int) (currentPlayers * (maxPlayers / 100.0f)));
+        progressBar.setProgress(currentPlayers);
+        fab.setEnabled(currentPlayers < (teams.size() * 6));
+        if(!fab.isEnabled())
+        {
+            fab.hide();
+        }
     }
-
 
     @Override
     public void onBackPressed()
