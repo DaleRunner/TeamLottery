@@ -83,4 +83,6 @@
     <string name="title_activity_lottery">Draw a Team</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="choose_tile">Choose Tile</string>
+    <string name="team_overview">Team overview</string>
+    <string name="team_legend">M/F/Total</string>
 </resources>

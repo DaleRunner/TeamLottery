@@ -10,13 +10,46 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="eu.zvireciliga.teamlottery.MainActivity"
     tools:showIn="@layout/activity_main_top">
 
-    <TextView
+    <ProgressBar android:id="@+id/progressBar"
+                 style="?android:attr/progressBarStyleHorizontal"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:progress="50"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentStart="true"/>
+
+    <TextView android:id="@+id/textOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Team overview"
-        android:textStyle="bold" />
+        android:text="@string/team_overview"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView android:id="@+id/textLegend"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/team_legend"
+              android:textStyle="bold"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentEnd="true"
+              android:layout_marginEnd="5dp"
+              android:layout_marginBottom="10dp"/>
+
+    <ListView android:id="@+id/teamList"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_alignParentStart="true"
+              android:layout_below="@+id/textOverview"
+              android:layout_above="@+id/progressBar"
+              android:divider="@android:color/transparent"
+              android:dividerHeight="10.0sp"
+              android:headerDividersEnabled="false"/>
+
 </RelativeLayout>

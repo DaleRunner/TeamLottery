@@ -1,12 +1,14 @@
 package eu.zvireciliga.teamlottery.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Team
 {
     private long id;
     private String name;
-    private List<Player> players;
+    private List<Player> males = new ArrayList<>();
+    private List<Player> females = new ArrayList<>();
 
     public long getId()
     {
@@ -30,11 +32,29 @@ public class Team
 
     public List<Player> getPlayers()
     {
+        final List<Player> players = new ArrayList<>();
+        players.addAll(getMales());
+        players.addAll(getFemales());
         return players;
     }
 
-    public void setPlayers(List<Player> players)
+    public List<Player> getMales()
     {
-        this.players = players;
+        return males;
+    }
+
+    public void setMales(List<Player> males)
+    {
+        this.males = males;
+    }
+
+    public List<Player> getFemales()
+    {
+        return females;
+    }
+
+    public void setFemales(List<Player> females)
+    {
+        this.females = females;
     }
 }
