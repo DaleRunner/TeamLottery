@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.dao;
+package eu.zvireciliga.teamlottery.data;
 
 import java.util.List;
 

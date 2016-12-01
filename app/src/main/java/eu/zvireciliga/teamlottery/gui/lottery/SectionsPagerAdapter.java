@@ -6,18 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import eu.zvireciliga.teamlottery.R;
+import eu.zvireciliga.teamlottery.data.model.Gender;
 import eu.zvireciliga.teamlottery.gui.GUIArguments;
-import eu.zvireciliga.teamlottery.model.Gender;
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter
+class SectionsPagerAdapter extends FragmentPagerAdapter
 {
-    private Context context;
+    private final Context context;
+    private final Gender gender;
 
-    public SectionsPagerAdapter(FragmentManager fm, Context context)
+    SectionsPagerAdapter(FragmentManager fm, Context context, Gender gender)
     {
         super(fm);
         this.context = context;
+        this.gender = gender;
     }
 
     @Override
@@ -25,23 +26,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
     {
         final LotteryGridFragment fragment = new LotteryGridFragment_();
         final Bundle args = new Bundle();
-        args.putInt(GUIArguments.ARG_GENDER, position);
+        args.putSerializable(GUIArguments.ARG_GENDER, gender);
         fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public int getCount()
     {
-        return Gender.values().length;
+        return 1;
     }
 
     @Override
     public CharSequence getPageTitle(int position)
     {
-        final Gender gender = Gender.values()[position];
-        int resource = Gender.MALE.equals(gender) ? R.string.player_male : R.string.player_female;
-        return context.getString(resource);
+        return context.getString(gender.getString());
     }
 }

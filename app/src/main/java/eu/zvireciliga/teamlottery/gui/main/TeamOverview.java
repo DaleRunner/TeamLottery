@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.gui;
+package eu.zvireciliga.teamlottery.gui.main;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +10,7 @@ import org.androidannotations.annotations.ViewById;
 
 import eu.zvireciliga.teamlottery.R;
 import eu.zvireciliga.teamlottery.TeamSettings;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
 @EViewGroup(R.layout.activity_main_team)
 public class TeamOverview extends LinearLayout

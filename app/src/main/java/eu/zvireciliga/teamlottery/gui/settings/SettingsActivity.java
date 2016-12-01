@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery;
+package eu.zvireciliga.teamlottery.gui.settings;
 
 
 import android.preference.PreferenceFragment;
@@ -10,8 +10,8 @@ import org.androidannotations.annotations.EActivity;
 
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.gui.settings.GeneralPreferenceFragment;
-import eu.zvireciliga.teamlottery.gui.settings.NotificationPreferenceFragment;
+import eu.zvireciliga.teamlottery.AppCompatPreferenceActivity;
+import eu.zvireciliga.teamlottery.R;
 
 @EActivity()
 public class SettingsActivity extends AppCompatPreferenceActivity

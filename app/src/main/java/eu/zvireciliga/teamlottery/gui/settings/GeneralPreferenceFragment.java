@@ -6,7 +6,6 @@ import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
 import eu.zvireciliga.teamlottery.R;
-import eu.zvireciliga.teamlottery.SettingsActivity_;
 
 public class GeneralPreferenceFragment extends PreferenceFragment
 {

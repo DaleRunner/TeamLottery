@@ -13,11 +13,11 @@ import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 import eu.zvireciliga.teamlottery.R;
-import eu.zvireciliga.teamlottery.adapters.AvailableTeamsAdapter;
+import eu.zvireciliga.teamlottery.data.adapters.AvailableTeamsAdapter;
 import eu.zvireciliga.teamlottery.gui.GUIArguments;
-import eu.zvireciliga.teamlottery.model.Gender;
-import eu.zvireciliga.teamlottery.model.Player;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.model.Gender;
+import eu.zvireciliga.teamlottery.data.model.Player;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
 @EFragment(R.layout.fragment_lottery)
 public class LotteryGridFragment extends Fragment
@@ -29,12 +29,12 @@ public class LotteryGridFragment extends Fragment
     GridView gridView;
 
     @FragmentArg(GUIArguments.ARG_GENDER)
-    int gender;
+    Gender gender;
 
     @AfterViews
     void initialize()
     {
-        adapter.setGender(Gender.getValue(gender));
+        adapter.setGender(gender);
         gridView.setAdapter(adapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -43,7 +43,7 @@ public class LotteryGridFragment extends Fragment
             {
                 final Team team = adapter.getItem(position);
                 final Player player = new Player();
-                player.setGender(Gender.getValue(gender));
+                player.setGender(gender);
 
                 final DraftResultDialog dialog = new DraftResultDialog_();
 

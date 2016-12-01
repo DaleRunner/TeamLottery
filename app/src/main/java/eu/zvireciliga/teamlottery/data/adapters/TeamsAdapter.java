@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.adapters;
+package eu.zvireciliga.teamlottery.data.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -13,10 +13,10 @@ import org.androidannotations.annotations.RootContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.dao.TeamDAO;
-import eu.zvireciliga.teamlottery.gui.TeamOverview;
-import eu.zvireciliga.teamlottery.gui.TeamOverview_;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.gui.main.TeamOverview;
+import eu.zvireciliga.teamlottery.gui.main.TeamOverview_;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
 @EBean
 public class TeamsAdapter extends BaseAdapter
@@ -27,12 +27,12 @@ public class TeamsAdapter extends BaseAdapter
     Context context;
 
     @Bean
-    TeamDAO dao;
+    GlobalDAO dao;
 
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
+        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)

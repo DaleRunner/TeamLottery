@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="eu.zvireciliga.teamlottery.MainActivity"
+    tools:context="eu.zvireciliga.teamlottery.gui.main.MainActivity"
     tools:showIn="@layout/activity_main_top">
 
     <ProgressBar android:id="@+id/progressBar"

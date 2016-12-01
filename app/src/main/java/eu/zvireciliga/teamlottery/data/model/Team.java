@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.model;
+package eu.zvireciliga.teamlottery.data.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

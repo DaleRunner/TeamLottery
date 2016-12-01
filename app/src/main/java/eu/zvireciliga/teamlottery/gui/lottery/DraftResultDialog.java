@@ -13,8 +13,8 @@ import org.androidannotations.annotations.FragmentArg;
 
 import eu.zvireciliga.teamlottery.R;
 import eu.zvireciliga.teamlottery.gui.GUIArguments;
-import eu.zvireciliga.teamlottery.model.Player;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.model.Player;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
 @EFragment
 public class DraftResultDialog extends DialogFragment
@@ -38,7 +38,7 @@ public class DraftResultDialog extends DialogFragment
     {
         return new AlertDialog.Builder(getActivity())
             .setTitle(R.string.dialog_confirm_team)
-            .setMessage("Team: " + team.getName())
+            .setMessage("Team: " + team.getName() + " (" + getContext().getString(player.getGender().getString()) + ")")
             .setPositiveButton(R.string.dialog_save, new DialogInterface.OnClickListener()
             {
                 @Override

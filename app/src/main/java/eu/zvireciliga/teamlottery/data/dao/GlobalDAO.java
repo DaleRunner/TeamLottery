@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.dao;
+package eu.zvireciliga.teamlottery.data.dao;
 
 import org.androidannotations.annotations.EBean;
 
@@ -7,14 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import eu.zvireciliga.teamlottery.model.Audit;
-import eu.zvireciliga.teamlottery.model.Player;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.OnChangeListener;
+import eu.zvireciliga.teamlottery.data.model.Audit;
+import eu.zvireciliga.teamlottery.data.model.Player;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
 @EBean(scope = EBean.Scope.Singleton)
-public class TeamDAO
+public class GlobalDAO
 {
-    public interface OnTeamChangeListener extends OnChangeListener<Team> {}
+    public interface OnTeamChangeListener extends OnChangeListener<Team>
+    {}
     public interface OnAuditChangeListener extends OnChangeListener<Audit> {}
 
     private List<OnTeamChangeListener> teamListeners = new ArrayList<>();
@@ -23,7 +25,7 @@ public class TeamDAO
     private List<Team> teams = new ArrayList<>();
     private List<Audit> audits = new ArrayList<>();
 
-    TeamDAO()
+    GlobalDAO()
     {
         for(String name : Arrays.asList("Sojky", "Hrdličky", "Drozdi", "Kukačky", "Jestřábi", "Sýkorky", "Kormoráni", "Rorýsi", "Skřivani", "Konipasi", "Volavky", "Sovy"))
         {

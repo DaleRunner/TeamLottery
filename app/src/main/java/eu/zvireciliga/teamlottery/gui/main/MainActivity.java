@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery;
+package eu.zvireciliga.teamlottery.gui.main;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
@@ -20,15 +20,19 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.adapters.AuditAdapter;
-import eu.zvireciliga.teamlottery.adapters.TeamsAdapter;
-import eu.zvireciliga.teamlottery.dao.TeamDAO;
-import eu.zvireciliga.teamlottery.model.Audit;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.R;
+import eu.zvireciliga.teamlottery.data.adapters.AuditAdapter;
+import eu.zvireciliga.teamlottery.data.adapters.TeamsAdapter;
+import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.model.Audit;
+import eu.zvireciliga.teamlottery.data.model.Gender;
+import eu.zvireciliga.teamlottery.data.model.Team;
+import eu.zvireciliga.teamlottery.gui.lottery.LotteryActivity_;
+import eu.zvireciliga.teamlottery.gui.settings.SettingsActivity_;
 
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.options)
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements GenderPickerDialog.GenderPickerDialogListener
 {
     @ViewById
     Toolbar toolbar;
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     AuditAdapter auditAdapter;
 
     @Bean
-    TeamDAO dao;
+    GlobalDAO dao;
 
     private final List<Team> teams = new ArrayList<>();
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
+        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> items)
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         calculateProgress();
         progressBar.setMax(teams.size() * 6);
 
-        dao.getAudit(new TeamDAO.OnAuditChangeListener()
+        dao.getAudit(new GlobalDAO.OnAuditChangeListener()
         {
             @Override
             public void onChange(List<Audit> items)
@@ -134,6 +138,12 @@ public class MainActivity extends AppCompatActivity
     @Click(R.id.fab)
     void onFabClick()
     {
-        LotteryActivity_.intent(MainActivity.this).start();
+        new GenderPickerDialog().show(getFragmentManager(), "GenderPickerDialog");
+    }
+
+    @Override
+    public void onDialogClick(GenderPickerDialog dialog, Gender gender)
+    {
+        LotteryActivity_.intent(MainActivity.this).gender(gender).start();
     }
 }

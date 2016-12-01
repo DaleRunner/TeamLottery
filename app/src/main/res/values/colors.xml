@@ -7,4 +7,6 @@
     <color name="teamEmpty">#FFFFFF</color>
     <color name="teamPartial">#ced3f9</color>
     <color name="teamFull">#303F9F</color>
+
+    <color name="colorSecondary">#bebebe</color>
 </resources>

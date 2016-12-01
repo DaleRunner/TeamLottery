@@ -7,7 +7,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity_"
+            android:name=".gui.main.MainActivity_"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -16,21 +16,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity_"
+            android:name=".gui.settings.SettingsActivity_"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity_">
+            android:parentActivityName=".gui.main.MainActivity_">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.zvireciliga.teamlottery.MainActivity_"/>
+                android:value="eu.zvireciliga.teamlottery.gui.main.MainActivity_"/>
         </activity>
         <activity
-            android:name=".LotteryActivity_"
+            android:name=".gui.lottery.LotteryActivity_"
             android:label="@string/title_activity_lottery"
-            android:parentActivityName=".MainActivity_"
+            android:parentActivityName=".gui.main.MainActivity_"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="eu.zvireciliga.teamlottery.MainActivity_"/>
+                android:value="eu.zvireciliga.teamlottery.gui.main.MainActivity_"/>
         </activity>
     </application>
 </manifest>

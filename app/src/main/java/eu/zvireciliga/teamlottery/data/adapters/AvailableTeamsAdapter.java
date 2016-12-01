@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.adapters;
+package eu.zvireciliga.teamlottery.data.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -16,19 +16,19 @@ import java.util.List;
 import java.util.Random;
 
 import eu.zvireciliga.teamlottery.TeamSettings;
-import eu.zvireciliga.teamlottery.dao.TeamDAO;
+import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
 import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView;
 import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView_;
-import eu.zvireciliga.teamlottery.model.Gender;
-import eu.zvireciliga.teamlottery.model.Team;
+import eu.zvireciliga.teamlottery.data.model.Gender;
+import eu.zvireciliga.teamlottery.data.model.Team;
 
-import static eu.zvireciliga.teamlottery.model.Gender.FEMALE;
-import static eu.zvireciliga.teamlottery.model.Gender.MALE;
+import static eu.zvireciliga.teamlottery.data.model.Gender.FEMALE;
+import static eu.zvireciliga.teamlottery.data.model.Gender.MALE;
 
 @EBean
 public class AvailableTeamsAdapter extends BaseAdapter
 {
-    private final long seed = System.nanoTime();
+    private static final long seed = System.nanoTime();
     private final List<Team> teams = new ArrayList<>();
     private final List<Team> availableTeams = new ArrayList<>();
     private Gender gender;
@@ -37,12 +37,12 @@ public class AvailableTeamsAdapter extends BaseAdapter
     Context context;
 
     @Bean
-    TeamDAO dao;
+    GlobalDAO dao;
 
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
+        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)

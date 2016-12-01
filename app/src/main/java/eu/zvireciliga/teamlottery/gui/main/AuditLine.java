@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.gui;
+package eu.zvireciliga.teamlottery.gui.main;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -11,8 +11,8 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import eu.zvireciliga.teamlottery.R;
-import eu.zvireciliga.teamlottery.dao.TeamDAO;
-import eu.zvireciliga.teamlottery.model.Audit;
+import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.model.Audit;
 
 @EViewGroup(R.layout.navigation_audit_item)
 public class AuditLine extends LinearLayout
@@ -23,8 +23,11 @@ public class AuditLine extends LinearLayout
     @ViewById
     TextView teamName;
 
+    @ViewById
+    TextView gender;
+
     @Bean
-    TeamDAO dao;
+    GlobalDAO dao;
 
     private Audit audit;
 
@@ -38,6 +41,7 @@ public class AuditLine extends LinearLayout
         this.audit = audit;
         timestamp.setText(DateUtils.formatDateTime(getContext(), audit.getTimestamp(), DateUtils.FORMAT_SHOW_TIME));
         teamName.setText(audit.getTeam().getName());
+        gender.setText(audit.getPlayer().getGender().getString());
     }
 
     @Click(R.id.revertButton)

@@ -1,4 +1,4 @@
-package eu.zvireciliga.teamlottery.adapters;
+package eu.zvireciliga.teamlottery.data.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.dao.TeamDAO;
-import eu.zvireciliga.teamlottery.gui.AuditLine;
-import eu.zvireciliga.teamlottery.gui.AuditLine_;
-import eu.zvireciliga.teamlottery.model.Audit;
+import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.gui.main.AuditLine;
+import eu.zvireciliga.teamlottery.gui.main.AuditLine_;
+import eu.zvireciliga.teamlottery.data.model.Audit;
 
 @EBean
 public class AuditAdapter extends BaseAdapter
@@ -28,12 +28,12 @@ public class AuditAdapter extends BaseAdapter
     Context context;
 
     @Bean
-    TeamDAO dao;
+    GlobalDAO dao;
 
     @AfterInject
     void initAdapter()
     {
-        audits.addAll(dao.getAudit(new TeamDAO.OnAuditChangeListener()
+        audits.addAll(dao.getAudit(new GlobalDAO.OnAuditChangeListener()
         {
             @Override
             public void onChange(List<Audit> newTeams)

@@ -24,15 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/navigation_header_include"
+            <include android:id="@+id/navigation_header_include"
                 layout="@layout/navigation_header" />
 
-            <ListView
-                android:id="@+id/nav_view_list"
+            <TextView android:id="@+id/nav_view_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/navigation_header_include"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:textSize="16sp"
+                android:text="@string/audit" />
+
+            <ListView android:id="@+id/nav_view_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/navigation_header_include"/>
+                android:layout_below="@id/nav_view_title"/>
 
         </RelativeLayout>
 
