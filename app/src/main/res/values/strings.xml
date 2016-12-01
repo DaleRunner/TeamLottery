@@ -88,4 +88,7 @@
     <string name="dialog_confirm_team">Confirm draft</string>
     <string name="dialog_save">Save</string>
     <string name="dialog_cancel">Cancel</string>
+
+    <string name="player_male">Man</string>
+    <string name="player_female">Woman</string>
 </resources>

@@ -1,7 +1,6 @@
 package eu.zvireciliga.teamlottery;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,8 +20,10 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.zvireciliga.teamlottery.adapters.AuditAdapter;
 import eu.zvireciliga.teamlottery.adapters.TeamsAdapter;
 import eu.zvireciliga.teamlottery.dao.TeamDAO;
+import eu.zvireciliga.teamlottery.model.Audit;
 import eu.zvireciliga.teamlottery.model.Team;
 
 @EActivity(R.layout.activity_main)
@@ -35,20 +36,23 @@ public class MainActivity extends AppCompatActivity
     @ViewById(R.id.drawer_layout)
     DrawerLayout drawer;
 
-    @ViewById(R.id.nav_view)
-    NavigationView navigationView;
-
     @ViewById
     FloatingActionButton fab;
 
     @ViewById
     ListView teamList;
 
+    @ViewById(R.id.nav_view_list)
+    ListView navigationViewItems;
+
     @ViewById
     ProgressBar progressBar;
 
     @Bean
     TeamsAdapter teamsAdapter;
+
+    @Bean
+    AuditAdapter auditAdapter;
 
     @Bean
     TeamDAO dao;
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     void initialize()
     {
         teamList.setAdapter(teamsAdapter);
+        navigationViewItems.setAdapter(auditAdapter);
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -68,15 +73,27 @@ public class MainActivity extends AppCompatActivity
         teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
         {
             @Override
-            public void onChange(List<Team> newTeams)
+            public void onChange(List<Team> items)
             {
                 teams.clear();
-                teams.addAll(newTeams);
+                teams.addAll(items);
                 calculateProgress();
             }
         }));
         calculateProgress();
         progressBar.setMax(teams.size() * 6);
+
+        dao.getAudit(new TeamDAO.OnAuditChangeListener()
+        {
+            @Override
+            public void onChange(List<Audit> items)
+            {
+                if (drawer.isDrawerOpen(GravityCompat.START))
+                {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            }
+        });
     }
 
     private void calculateProgress()

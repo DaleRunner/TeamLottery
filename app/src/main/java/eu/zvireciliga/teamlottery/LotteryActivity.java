@@ -37,7 +37,7 @@ public class LotteryActivity extends AppCompatActivity implements DraftResultDia
     {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        pager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager()));
+        pager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(pager);
     }
 

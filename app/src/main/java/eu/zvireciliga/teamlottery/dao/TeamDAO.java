@@ -46,6 +46,12 @@ public class TeamDAO
         return teams;
     }
 
+    public List<Audit> getAudit(OnAuditChangeListener listener)
+    {
+        auditListeners.add(listener);
+        return audits;
+    }
+
     public void addPlayer(Team team, Player player)
     {
         team.getPlayers().add(player);

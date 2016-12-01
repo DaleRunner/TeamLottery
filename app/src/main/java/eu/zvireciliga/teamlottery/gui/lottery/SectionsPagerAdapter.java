@@ -1,18 +1,23 @@
 package eu.zvireciliga.teamlottery.gui.lottery;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import eu.zvireciliga.teamlottery.R;
 import eu.zvireciliga.teamlottery.gui.GUIArguments;
 import eu.zvireciliga.teamlottery.model.Gender;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter
 {
-    public SectionsPagerAdapter(FragmentManager fm)
+    private Context context;
+
+    public SectionsPagerAdapter(FragmentManager fm, Context context)
     {
         super(fm);
+        this.context = context;
     }
 
     @Override
@@ -22,6 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
         final Bundle args = new Bundle();
         args.putInt(GUIArguments.ARG_GENDER, position);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -34,6 +40,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
     @Override
     public CharSequence getPageTitle(int position)
     {
-        return Gender.values()[position].toString();
+        final Gender gender = Gender.values()[position];
+        int resource = Gender.MALE.equals(gender) ? R.string.player_male : R.string.player_female;
+        return context.getString(resource);
     }
 }

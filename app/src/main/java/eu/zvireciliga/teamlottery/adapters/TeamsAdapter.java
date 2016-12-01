@@ -63,7 +63,7 @@ public class TeamsAdapter extends BaseAdapter
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public TeamOverview getView(int position, View convertView, ViewGroup parent)
     {
         final TeamOverview teamView = (convertView == null) ? TeamOverview_.build(context) : (TeamOverview) convertView;
         teamView.bind(getItem(position));
