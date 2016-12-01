@@ -42,7 +42,7 @@ public class AvailableTeamsAdapter extends BaseAdapter
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new TeamDAO.OnChangeListener()
+        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)
@@ -99,8 +99,6 @@ public class AvailableTeamsAdapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        final TeamPickerView teamView = (convertView == null) ? TeamPickerView_.build(context) : (TeamPickerView) convertView;
-        teamView.bind(getItem(position));
-        return teamView;
+        return (convertView == null) ? TeamPickerView_.build(context) : (TeamPickerView) convertView;
     }
 }

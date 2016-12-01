@@ -16,8 +16,6 @@ import java.util.List;
 import eu.zvireciliga.teamlottery.dao.TeamDAO;
 import eu.zvireciliga.teamlottery.gui.TeamOverview;
 import eu.zvireciliga.teamlottery.gui.TeamOverview_;
-import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView;
-import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView_;
 import eu.zvireciliga.teamlottery.model.Team;
 
 @EBean
@@ -34,7 +32,7 @@ public class TeamsAdapter extends BaseAdapter
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new TeamDAO.OnChangeListener()
+        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)

@@ -1,9 +1,11 @@
 package eu.zvireciliga.teamlottery.model;
 
-public class Player
+import java.io.Serializable;
+
+public class Player implements Serializable
 {
     private long id;
-    private boolean man;
+    private Gender gender;
 
     public long getId()
     {
@@ -15,13 +17,13 @@ public class Player
         this.id = id;
     }
 
-    public boolean isMan()
+    public Gender getGender()
     {
-        return man;
+        return gender;
     }
 
-    public void setMan(boolean man)
+    public void setGender(Gender gender)
     {
-        this.man = man;
+        this.gender = gender;
     }
 }

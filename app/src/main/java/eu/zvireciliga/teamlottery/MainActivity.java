@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        teams.addAll(dao.getTeams(new TeamDAO.OnChangeListener()
+        teams.addAll(dao.getTeams(new TeamDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)
@@ -81,13 +81,16 @@ public class MainActivity extends AppCompatActivity
 
     private void calculateProgress()
     {
-        int currentPlayers = 0;
+        int males = 0, females = 0;
         for(Team team : teams)
         {
-            currentPlayers += team.getPlayers().size();
+            males += team.getMales().size();
+            females += team.getFemales().size();
         }
-        progressBar.setProgress(currentPlayers);
-        fab.setEnabled(currentPlayers < (teams.size() * 6));
+        progressBar.setProgress(males);
+        progressBar.setSecondaryProgress(males + females);
+
+        fab.setEnabled((males + females) < (teams.size() * 6));
         if(!fab.isEnabled())
         {
             fab.hide();

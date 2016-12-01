@@ -85,4 +85,7 @@
     <string name="choose_tile">Choose Tile</string>
     <string name="team_overview">Team overview</string>
     <string name="team_legend">M/F/Total</string>
+    <string name="dialog_confirm_team">Confirm draft</string>
+    <string name="dialog_save">Save</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>

@@ -1,14 +1,15 @@
 package eu.zvireciliga.teamlottery.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Team
+public class Team implements Serializable
 {
     private long id;
     private String name;
-    private List<Player> males = new ArrayList<>();
-    private List<Player> females = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
 
     public long getId()
     {
@@ -32,29 +33,32 @@ public class Team
 
     public List<Player> getPlayers()
     {
-        final List<Player> players = new ArrayList<>();
-        players.addAll(getMales());
-        players.addAll(getFemales());
         return players;
     }
 
     public List<Player> getMales()
     {
-        return males;
-    }
-
-    public void setMales(List<Player> males)
-    {
-        this.males = males;
+        final List<Player> males = new ArrayList<>();
+        for(Player player : players)
+        {
+            if(Gender.MALE.equals(player.getGender()))
+            {
+                males.add(player);
+            }
+        }
+        return Collections.unmodifiableList(males);
     }
 
     public List<Player> getFemales()
     {
-        return females;
-    }
-
-    public void setFemales(List<Player> females)
-    {
-        this.females = females;
+        final List<Player> females = new ArrayList<>();
+        for(Player player : players)
+        {
+            if(Gender.FEMALE.equals(player.getGender()))
+            {
+                females.add(player);
+            }
+        }
+        return Collections.unmodifiableList(females);
     }
 }
