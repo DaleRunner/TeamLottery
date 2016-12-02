@@ -10,17 +10,17 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import eu.zvireciliga.teamlottery.TeamSettings;
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
-import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView;
-import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView_;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
 import eu.zvireciliga.teamlottery.data.model.Gender;
 import eu.zvireciliga.teamlottery.data.model.Team;
+import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView;
+import eu.zvireciliga.teamlottery.gui.lottery.TeamPickerView_;
 
 import static eu.zvireciliga.teamlottery.data.model.Gender.FEMALE;
 import static eu.zvireciliga.teamlottery.data.model.Gender.MALE;
@@ -28,7 +28,7 @@ import static eu.zvireciliga.teamlottery.data.model.Gender.MALE;
 @EBean
 public class AvailableTeamsAdapter extends BaseAdapter
 {
-    private static final long seed = System.nanoTime();
+    private static final Random random = new SecureRandom(new SecureRandom().generateSeed(20));
     private final List<Team> teams = new ArrayList<>();
     private final List<Team> availableTeams = new ArrayList<>();
     private Gender gender;
@@ -42,7 +42,7 @@ public class AvailableTeamsAdapter extends BaseAdapter
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
+        dao.watchTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)
@@ -51,8 +51,7 @@ public class AvailableTeamsAdapter extends BaseAdapter
                 teams.addAll(newTeams);
                 reload();
             }
-        }));
-        reload();
+        });
     }
 
     public void setGender(Gender gender)
@@ -66,15 +65,15 @@ public class AvailableTeamsAdapter extends BaseAdapter
         availableTeams.clear();
         for(Team team : teams)
         {
-            if(team.getPlayers().size() < TeamSettings.MAX_PLAYERS
+            if(team.getPlayers().size() < dao.getMaxPlayers()
                     && (gender == null
-                        || (MALE.equals(gender) && team.getMales().size() < TeamSettings.MAX_MALES))
-                        || (FEMALE.equals(gender) && team.getFemales().size() < TeamSettings.MAX_FEMALES))
+                        || (MALE.equals(gender) && team.getMales().size() < dao.getMaxTeamPlayers(Gender.MALE)))
+                        || (FEMALE.equals(gender) && team.getFemales().size() < dao.getMaxTeamPlayers(Gender.FEMALE)))
             {
                 availableTeams.add(team);
             }
         }
-        Collections.shuffle(availableTeams, new Random(seed));
+        Collections.shuffle(availableTeams, random);
         notifyDataSetChanged();
     }
 

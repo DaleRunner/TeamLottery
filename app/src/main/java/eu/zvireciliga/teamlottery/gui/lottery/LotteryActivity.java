@@ -13,7 +13,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
 import eu.zvireciliga.teamlottery.R;
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
 import eu.zvireciliga.teamlottery.data.model.Gender;
 import eu.zvireciliga.teamlottery.data.model.Player;
 import eu.zvireciliga.teamlottery.data.model.Team;

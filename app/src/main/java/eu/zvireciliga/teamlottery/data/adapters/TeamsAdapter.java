@@ -13,7 +13,7 @@ import org.androidannotations.annotations.RootContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
 import eu.zvireciliga.teamlottery.gui.main.TeamOverview;
 import eu.zvireciliga.teamlottery.gui.main.TeamOverview_;
 import eu.zvireciliga.teamlottery.data.model.Team;
@@ -32,7 +32,7 @@ public class TeamsAdapter extends BaseAdapter
     @AfterInject
     void initAdapter()
     {
-        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
+        dao.watchTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> newTeams)
@@ -41,7 +41,7 @@ public class TeamsAdapter extends BaseAdapter
                 teams.addAll(newTeams);
                 notifyDataSetChanged();
             }
-        }));
+        });
     }
 
     @Override

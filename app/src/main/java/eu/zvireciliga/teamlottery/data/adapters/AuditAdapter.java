@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.model.Audit;
 import eu.zvireciliga.teamlottery.gui.main.AuditLine;
 import eu.zvireciliga.teamlottery.gui.main.AuditLine_;
-import eu.zvireciliga.teamlottery.data.model.Audit;
 
 @EBean
 public class AuditAdapter extends BaseAdapter
@@ -33,18 +33,17 @@ public class AuditAdapter extends BaseAdapter
     @AfterInject
     void initAdapter()
     {
-        audits.addAll(dao.getAudit(new GlobalDAO.OnAuditChangeListener()
+        dao.watchAudit(new GlobalDAO.OnAuditChangeListener()
         {
             @Override
             public void onChange(List<Audit> newTeams)
             {
                 audits.clear();
                 audits.addAll(newTeams);
-                notifyDataSetChanged();
                 Collections.reverse(audits);
+                notifyDataSetChanged();
             }
-        }));
-        Collections.reverse(audits);
+        });
     }
 
     @Override

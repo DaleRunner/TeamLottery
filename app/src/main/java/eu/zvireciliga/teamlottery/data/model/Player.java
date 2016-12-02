@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Player implements Serializable
 {
-    private long id;
+    private long id = System.nanoTime();
     private Gender gender;
 
     public long getId()
@@ -25,5 +25,27 @@ public class Player implements Serializable
     public void setGender(Gender gender)
     {
         this.gender = gender;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Player player = (Player) o;
+        return id == player.id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (int) (id ^ (id >>> 32));
     }
 }

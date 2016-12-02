@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.zvireciliga.teamlottery.R;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
 import eu.zvireciliga.teamlottery.data.adapters.AuditAdapter;
 import eu.zvireciliga.teamlottery.data.adapters.TeamsAdapter;
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
 import eu.zvireciliga.teamlottery.data.model.Audit;
 import eu.zvireciliga.teamlottery.data.model.Gender;
 import eu.zvireciliga.teamlottery.data.model.Team;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements GenderPickerDialo
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        teams.addAll(dao.getTeams(new GlobalDAO.OnTeamChangeListener()
+        dao.watchTeams(new GlobalDAO.OnTeamChangeListener()
         {
             @Override
             public void onChange(List<Team> items)
@@ -83,11 +83,10 @@ public class MainActivity extends AppCompatActivity implements GenderPickerDialo
                 teams.addAll(items);
                 calculateProgress();
             }
-        }));
-        calculateProgress();
-        progressBar.setMax(teams.size() * 6);
+        });
 
-        dao.getAudit(new GlobalDAO.OnAuditChangeListener()
+
+        dao.watchAudit(new GlobalDAO.OnAuditChangeListener()
         {
             @Override
             public void onChange(List<Audit> items)
@@ -108,10 +107,12 @@ public class MainActivity extends AppCompatActivity implements GenderPickerDialo
             males += team.getMales().size();
             females += team.getFemales().size();
         }
+
         progressBar.setProgress(males);
         progressBar.setSecondaryProgress(males + females);
+        progressBar.setMax(dao.getMaxPlayers());
 
-        fab.setEnabled((males + females) < (teams.size() * 6));
+        fab.setEnabled((males + females) < (dao.getMaxPlayers()));
         if(!fab.isEnabled())
         {
             fab.hide();

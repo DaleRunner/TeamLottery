@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Team implements Serializable
 {
-    private long id;
+    private long id = System.nanoTime();
     private String name;
     private List<Player> players = new ArrayList<>();
 
@@ -60,5 +60,27 @@ public class Team implements Serializable
             }
         }
         return Collections.unmodifiableList(females);
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Team team = (Team) o;
+        return id == team.id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (int) (id ^ (id >>> 32));
     }
 }

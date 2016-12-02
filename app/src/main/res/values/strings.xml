@@ -92,4 +92,6 @@
     <string name="player_male">Man</string>
     <string name="player_female">Woman</string>
     <string name="audit">Audit</string>
+    <string name="preference_debug">Debug</string>
+    <string name="preference_category_team">Team Settings</string>
 </resources>

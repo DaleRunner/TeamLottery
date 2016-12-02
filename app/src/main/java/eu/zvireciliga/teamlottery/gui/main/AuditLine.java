@@ -11,7 +11,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import eu.zvireciliga.teamlottery.R;
-import eu.zvireciliga.teamlottery.data.dao.GlobalDAO;
+import eu.zvireciliga.teamlottery.data.GlobalDAO;
 import eu.zvireciliga.teamlottery.data.model.Audit;
 
 @EViewGroup(R.layout.navigation_audit_item)

@@ -1,25 +1,28 @@
 package eu.zvireciliga.teamlottery.gui.settings;
 
 
-import android.preference.PreferenceFragment;
+import android.preference.PreferenceActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.PreferenceScreen;
+import org.androidannotations.annotations.ViewById;
 
-import java.util.List;
-
-import eu.zvireciliga.teamlottery.AppCompatPreferenceActivity;
 import eu.zvireciliga.teamlottery.R;
 
-@EActivity()
-public class SettingsActivity extends AppCompatPreferenceActivity
+@EActivity(R.layout.activity_settings)
+@PreferenceScreen(R.xml.preferences)
+public class SettingsActivity extends PreferenceActivity
 {
+    @ViewById
+    Toolbar toolbar;
+
     @AfterViews
     void initialize()
     {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -34,19 +37,5 @@ public class SettingsActivity extends AppCompatPreferenceActivity
             return true;
         }
         return super.onMenuItemSelected(featureId, item);
-    }
-
-    @Override
-    public void onBuildHeaders(List<Header> target)
-    {
-        loadHeadersFromResource(R.xml.pref_headers, target);
-    }
-
-    @Override
-    protected boolean isValidFragment(String fragmentName)
-    {
-        return PreferenceFragment.class.getName().equals(fragmentName)
-                || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || NotificationPreferenceFragment.class.getName().equals(fragmentName);
     }
 }

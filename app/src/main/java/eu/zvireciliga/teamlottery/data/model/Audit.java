@@ -2,8 +2,8 @@ package eu.zvireciliga.teamlottery.data.model;
 
 public class Audit
 {
+    private long id = System.nanoTime();
     private long timestamp = System.currentTimeMillis();
-    private long id;
     private Team team;
     private Player player;
 
@@ -49,5 +49,27 @@ public class Audit
     public void setPlayer(Player player)
     {
         this.player = player;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        Audit audit = (Audit) o;
+        return id == audit.id;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return (int) (id ^ (id >>> 32));
     }
 }

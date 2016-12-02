@@ -34,8 +34,8 @@ public class LotteryGridFragment extends Fragment
     @AfterViews
     void initialize()
     {
-        adapter.setGender(gender);
         gridView.setAdapter(adapter);
+        adapter.setGender(gender);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

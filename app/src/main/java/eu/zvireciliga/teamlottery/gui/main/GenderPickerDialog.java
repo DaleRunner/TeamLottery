@@ -8,9 +8,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import org.androidannotations.annotations.EFragment;
+
 import eu.zvireciliga.teamlottery.R;
 import eu.zvireciliga.teamlottery.data.model.Gender;
 
+@EFragment
 public class GenderPickerDialog extends DialogFragment
 {
     GenderPickerDialogListener listener;
