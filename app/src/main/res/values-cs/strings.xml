@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Losování týmu</string>
+    <string name="settings">Nastavení</string>
+    <string name="web_url">http://www.zvireciliga.eu</string>
+
+    <string name="navigation_drawer_open">Otevřít navigaci</string>
+    <string name="navigation_drawer_close">Zavřít navigaci</string>
+
+    <string name="action_settings">Nastavení</string>
+    <string name="title_activity_settings">Nastavení</string>
+
+    <string name="pref_header_general">Obecné</string>
+
+    <string name="title_activity_lottery">Losování týmu</string>
+    <string name="choose_tile">Choose Tile</string>
+    <string name="team_overview">Přehled týmů</string>
+    <string name="team_legend">Mužů / Žen / Celkem</string>
+    <string name="dialog_confirm_team">Potvrdit los</string>
+    <string name="dialog_save">Uložit</string>
+    <string name="dialog_cancel">Zrušit</string>
+    <string name="dialog_gender">Pohlaví</string>
+    <string name="player_male">Muž</string>
+    <string name="player_female">Žena</string>
+    <string name="audit">Audit</string>
+    <string name="preference_debug">Debug</string>
+    <string name="preference_category_team">Nastavení týmu</string>
+    <string name="action_reset">Smazat týmy</string>
+    <string name="action_initialize">Přidat týmy</string>
+</resources>
