@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements GenderPickerDialo
         {
             fab.hide();
         }
+        else
+        {
+            fab.show();
+        }
     }
 
     @Override
@@ -136,10 +140,22 @@ public class MainActivity extends AppCompatActivity implements GenderPickerDialo
         SettingsActivity_.intent(MainActivity.this).start();
     }
 
+    @OptionsItem(R.id.action_reset)
+    void resetMenuItem()
+    {
+        dao.reset();
+    }
+
+    @OptionsItem(R.id.action_initialize)
+    void initializeMenuItem()
+    {
+        dao.initializeTeams();
+    }
+
     @Click(R.id.fab)
     void onFabClick()
     {
-        new GenderPickerDialog().show(getFragmentManager(), "GenderPickerDialog");
+        new GenderPickerDialog_().show(getFragmentManager(), "GenderPickerDialog");
     }
 
     @Override

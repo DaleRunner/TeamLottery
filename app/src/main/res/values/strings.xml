@@ -94,4 +94,6 @@
     <string name="audit">Audit</string>
     <string name="preference_debug">Debug</string>
     <string name="preference_category_team">Team Settings</string>
+    <string name="action_reset">Delete Teams</string>
+    <string name="action_initialize">Create Teams</string>
 </resources>

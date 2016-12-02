@@ -68,8 +68,9 @@ public class GlobalDAO
         });
     }
 
-    public void initializeDefaultTeams()
+    public void initializeTeams()
     {
+        reset();
         for(String name : Arrays.asList("Sojky", "Hrdličky", "Drozdi", "Kukačky", "Jestřábi", "Sýkorky", "Kormoráni", "Rorýsi", "Skřivani", "Konipasi", "Volavky", "Sovy"))
         {
             final Team team = new Team();
@@ -77,6 +78,20 @@ public class GlobalDAO
             teams.add(team);
         }
         executeTeamListeners();
+    }
+
+    public void reset()
+    {
+        try
+        {
+            teams.clear();
+            audits.clear();
+        }
+        finally
+        {
+            executeTeamListeners();
+            executeAuditListeners();
+        }
     }
 
     public void watchTeams(OnTeamChangeListener listener)
