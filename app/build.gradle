@@ -10,10 +10,10 @@ android {
         applicationId "eu.zvireciliga.teamlottery"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode = build
+        versionCode = 59
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        archivesBaseName = "lottery-$versionName"
+        archivesBaseName = "lottery"
     }
     signingConfigs {
         production {

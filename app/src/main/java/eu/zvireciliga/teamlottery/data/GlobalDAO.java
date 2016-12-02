@@ -38,16 +38,24 @@ public class GlobalDAO
     @AfterInject
     void initialize()
     {
-        final List<Team> storedTeams = new Gson().fromJson(preferences.teams().get(), TEAM_TYPE);
-        if(storedTeams != null)
+        try
         {
-            teams.addAll(storedTeams);
-        }
+            final List<Team> storedTeams = new Gson().fromJson(preferences.teams().get(), TEAM_TYPE);
+            if (storedTeams != null)
+            {
+                teams.addAll(storedTeams);
+            }
 
-        final List<Audit> storedAudits = new Gson().fromJson(preferences.audits().get(), AUDIT_TYPE);
-        if(storedAudits != null)
+            final List<Audit> storedAudits = new Gson().fromJson(preferences.audits().get(), AUDIT_TYPE);
+            if(storedAudits != null)
+            {
+                audits.addAll(storedAudits);
+            }
+        }
+        catch (Exception e)
         {
-            audits.addAll(storedAudits);
+            preferences.teams().remove();
+            preferences.audits().remove();
         }
 
         watchTeams(new OnTeamChangeListener()
