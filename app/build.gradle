@@ -1,36 +1,46 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'com.github.triplet.play'
 
 def AAVersion = '4.1.0'
 
 android {
+    signingConfigs {
+        production {
+            keyAlias alias
+            keyPassword password
+            storeFile new File(keystore)
+            storePassword password
+        }
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile new File(debugKeystore)
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "eu.zvireciliga.teamlottery"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode = 59
+        versionCode = build.toInteger()
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        archivesBaseName = "lottery"
-    }
-    signingConfigs {
-        production {
-            keyAlias alias
-            keyPassword password
-            storeFile = new File(keystore)
-            storePassword password
-        }
     }
     buildTypes {
         release {
-            minifyEnabled false
             signingConfig signingConfigs.production
         }
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.debug
         }
+    }
+    play {
+        track = 'alpha'
+        jsonFile = new File(publishKeystore)
     }
 }
 
